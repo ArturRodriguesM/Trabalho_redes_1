@@ -1,56 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutX="62.0" layoutY="69.0" minHeight="0.0" minWidth="0.0" prefHeight="244.0" prefWidth="327.0">
+      <Group fx:id="telaDispositivos" autoSizeChildren="false" layoutX="60.0" layoutY="60.0" visible="false">
          <children>
-            <ImageView fitHeight="244.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/fundo_azul.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="20.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/moldura.png" />
-               </image>
-            </ImageView>
-            <VBox layoutX="118.0" layoutY="69.0" prefHeight="138.0" prefWidth="187.0" />
-            <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="21.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/moldura.png" />
-               </image>
-            </ImageView>
-            <TextField layoutX="139.0" layoutY="194.0" />
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="244.0" prefWidth="327.0">
+               <children>
+                  <ImageView fitHeight="244.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/fundo_azul.jpeg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="20.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/moldura.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="21.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/moldura.png" />
+                     </image>
+                  </ImageView>
+                  <TextArea fx:id="caixaDeTextoEntrada" layoutX="127.0" layoutY="34.0" prefHeight="150.0" prefWidth="172.0" wrapText="true" />
+                  <Button fx:id="botaoEnviar" layoutX="185.0" layoutY="193.0" mnemonicParsing="false" onMouseClicked="#enviarMensagem" text="ENVIAR" />
+               </children>
+            </AnchorPane>
+        <AnchorPane layoutX="553.0" minHeight="0.0" minWidth="0.0" prefHeight="244.0" prefWidth="327.0">
+               <children>
+                  <ImageView fitHeight="244.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/fundo_azul.jpeg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="20.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/moldura.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="21.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/moldura.png" />
+                     </image>
+                  </ImageView>
+                  <ScrollPane fx:id="scrollPane" layoutX="109.0" layoutY="44.0" prefHeight="141.0" prefWidth="204.0" vvalue="1.0">
+                     <content>
+                        <VBox fx:id="caixaDeTextoSaida" layoutY="141.0" prefHeight="0.0" prefWidth="189.0" />
+                     </content>
+                  </ScrollPane>
+                  <Button layoutX="166.0" layoutY="193.0" mnemonicParsing="false" onMouseClicked="#limparChat" text="LIMPAR CHAT" />
+               </children>
+            </AnchorPane>
          </children>
-      </AnchorPane>
-  <AnchorPane layoutX="610.0" layoutY="62.0" minHeight="0.0" minWidth="0.0" prefHeight="244.0" prefWidth="327.0">
+      </Group>
+      <Group fx:id="telaInicio" layoutX="321.0" layoutY="79.0">
          <children>
-            <ImageView fitHeight="244.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/fundo_azul.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="20.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/moldura.png" />
-               </image>
-            </ImageView>
-            <VBox layoutX="118.0" layoutY="69.0" prefHeight="138.0" prefWidth="187.0" />
-            <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="21.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/moldura.png" />
-               </image>
-            </ImageView>
-            <TextField layoutX="139.0" layoutY="194.0" />
+            <Group layoutX="60.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="172.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../Downloads/79923_im_msn_icon.png" />
+                     </image>
+                  </ImageView>
+                  <HBox alignment="CENTER" layoutX="141.0" prefHeight="192.0" prefWidth="95.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="M&#10;S&#10;N" textAlignment="RIGHT" wrappingWidth="42.13671875">
+                           <font>
+                              <Font name="System Bold" size="48.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="arlos&#10;&#10;em&#10;&#10;et" wrappingWidth="59.13671875">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </Group>
+            <Text layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trabalho prático sobre os protocolos da CAMADA FISICA da Ethernet" textAlignment="CENTER" wrappingWidth="360.2236328125">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Text>
+            <Button layoutX="124.0" layoutY="342.0" mnemonicParsing="false" text="INICIAR">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
          </children>
-      </AnchorPane>
-      <Pane layoutX="289.0" layoutY="-179.0" prefHeight="200.0" prefWidth="200.0" />
+      </Group>
    </children>
 </AnchorPane>
