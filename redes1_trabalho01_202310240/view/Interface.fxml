@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,68 +18,186 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" styleClass="fundo" stylesheets="@../index.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Group fx:id="telaDispositivos" autoSizeChildren="false" layoutX="60.0" layoutY="60.0" visible="false">
+      <AnchorPane fx:id="telaDispositivos" layoutX="60.0" layoutY="60.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="60.0">
          <children>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="244.0" prefWidth="327.0">
+            <VBox alignment="CENTER" layoutX="340.0" layoutY="140.0" prefHeight="76.0" prefWidth="191.0" spacing="10.0" styleClass="fundo-borda-branca" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0">
                <children>
-                  <ImageView fitHeight="244.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/fundo_azul.jpeg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="20.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/moldura.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="21.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/moldura.png" />
-                     </image>
-                  </ImageView>
-                  <TextArea fx:id="caixaDeTextoEntrada" layoutX="127.0" layoutY="34.0" prefHeight="150.0" prefWidth="172.0" wrapText="true" />
-                  <Button fx:id="botaoEnviar" layoutX="185.0" layoutY="193.0" mnemonicParsing="false" onMouseClicked="#enviarMensagem" text="ENVIAR" />
+                  <Label styleClass="velocidade-label" text="VELOCIDADE DE TRANSMISSAO" textAlignment="CENTER" wrapText="true" />
+                  <Slider />
                </children>
-            </AnchorPane>
-        <AnchorPane layoutX="553.0" minHeight="0.0" minWidth="0.0" prefHeight="244.0" prefWidth="327.0">
-               <children>
-                  <ImageView fitHeight="244.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/fundo_azul.jpeg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="20.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/moldura.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="21.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/moldura.png" />
-                     </image>
-                  </ImageView>
-                  <ScrollPane fx:id="scrollPane" layoutX="109.0" layoutY="44.0" prefHeight="141.0" prefWidth="204.0" vvalue="1.0">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets bottom="20.0" top="20.0" />
+               </opaqueInsets>
+            </VBox>
+            <TabPane prefHeight="294.0" prefWidth="325.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="50.0" AnchorPane.leftAnchor="0.0">
+              <tabs>
+                <Tab text="Aplicacao">
                      <content>
-                        <VBox fx:id="caixaDeTextoSaida" layoutY="141.0" prefHeight="0.0" prefWidth="189.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="252.0" prefWidth="325.0" styleClass="fundo-tab">
+                           <children>
+                              <ImageView fitHeight="244.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true" styleClass="fundo-tab" visible="false">
+                                 <image>
+                                    <Image url="@../img/fundo_azul.jpeg" />
+                                 </image>
+                              </ImageView>
+                              <HBox prefHeight="252.0" prefWidth="325.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="60.0">
+                                       <children>
+                                          <Group>
+                                             <children>
+                                                <ImageView fitHeight="50.0" fitWidth="49.0" layoutX="12.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../img/icone_marlos.jpg" />
+                                                   </image>
+                                                </ImageView>
+                                                <ImageView fitHeight="80.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../img/moldura.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </Group>
+                                          <Group>
+                                             <children>
+                                                <ImageView fitHeight="50.0" fitWidth="49.0" layoutX="12.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../img/icone_artur.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <ImageView fitHeight="80.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../img/moldura.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </Group>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <children>
+                                          <Label styleClass="titulo" text="TRANSMISSOR" />
+                                          <TextArea fx:id="caixaDeTextoEntrada" prefHeight="141.0" prefWidth="204.0" styleClass="caixa-texto-entrada" wrapText="true">
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" />
+                                             </VBox.margin>
+                                          </TextArea>
+                                          <Button fx:id="botaoEnviar" mnemonicParsing="false" onMouseClicked="#enviarMensagem" text="ENVIAR" />
+                                       </children>
+                                       <padding>
+                                          <Insets left="15.0" right="15.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
                      </content>
-                  </ScrollPane>
-                  <Button layoutX="166.0" layoutY="193.0" mnemonicParsing="false" onMouseClicked="#limparChat" text="LIMPAR CHAT" />
-               </children>
-            </AnchorPane>
+                  </Tab>
+                <Tab text="Camada Física">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="fundo-tab" />
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+            <TabPane layoutX="555.0" prefHeight="294.0" prefWidth="325.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="50.0" AnchorPane.rightAnchor="0.0">
+               <tabs>
+                  <Tab text="Aplicacao">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="252.0" prefWidth="325.0" styleClass="fundo-tab">
+                           <children>
+                              <HBox prefHeight="252.0" prefWidth="325.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="60.0">
+                                       <children>
+                                          <Group>
+                                             <children>
+                                                <ImageView fitHeight="50.0" fitWidth="49.0" layoutX="12.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../img/icone_artur.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <ImageView fitHeight="80.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../img/moldura.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </Group>
+                                          <Group>
+                                             <children>
+                                                <ImageView fitHeight="50.0" fitWidth="49.0" layoutX="12.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../img/icone_marlos.jpg" />
+                                                   </image>
+                                                </ImageView>
+                                                <ImageView fitHeight="80.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../img/moldura.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </Group>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <children>
+                                          <Label styleClass="titulo" text="RECEPTOR" />
+                                          <ScrollPane fx:id="scrollPane" prefHeight="141.0" prefWidth="204.0" styleClass="caixa-texto-saida" vvalue="1.0">
+                                             <content>
+                                                <VBox fx:id="caixaDeTextoSaida" layoutY="141.0" prefHeight="0.0" />
+                                             </content>
+                                             <padding>
+                                                <Insets left="5.0" top="5.0" />
+                                             </padding>
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" />
+                                             </VBox.margin>
+                                          </ScrollPane>
+                                          <Button mnemonicParsing="false" onMouseClicked="#limparChat" text="LIMPAR CHAT" />
+                                       </children>
+                                       <padding>
+                                          <Insets left="15.0" right="15.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Camada Física">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="fundo-tab" />
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+            <Button layoutX="412.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#escolherProtocolo" text="ESCOLHER PROTOCOLO" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="60.0" />
          </children>
-      </Group>
-      <Group fx:id="telaInicio" layoutX="321.0" layoutY="79.0">
+      </AnchorPane>
+      <AnchorPane fx:id="telaInicio" layoutX="193.0" layoutY="57.0" prefHeight="541.0" prefWidth="606.0" styleClass="fundo-inicio" visible="false" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
          <children>
-            <Group layoutX="60.0">
+            <AnchorPane layoutX="60.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="20.0">
                <children>
-                  <ImageView fitHeight="173.0" fitWidth="172.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="172.0" fitWidth="172.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0">
                      <image>
-                        <Image url="@../../../../../../../../Downloads/79923_im_msn_icon.png" />
+                        <Image url="@../img/icone_msn_w2.png" />
                      </image>
                   </ImageView>
-                  <HBox alignment="CENTER" layoutX="141.0" prefHeight="192.0" prefWidth="95.0">
+                  <HBox alignment="CENTER" layoutX="141.0" prefHeight="192.0" prefWidth="95.0" AnchorPane.rightAnchor="0.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="M&#10;S&#10;N" textAlignment="RIGHT" wrappingWidth="42.13671875">
                            <font>
@@ -88,18 +212,34 @@
                      </children>
                   </HBox>
                </children>
-            </Group>
-            <Text layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trabalho prático sobre os protocolos da CAMADA FISICA da Ethernet" textAlignment="CENTER" wrappingWidth="360.2236328125">
-               <font>
-                  <Font size="23.0" />
-               </font>
-            </Text>
-            <Button layoutX="124.0" layoutY="342.0" mnemonicParsing="false" text="INICIAR">
+            </AnchorPane>
+            <Button layoutX="160.0" layoutY="408.0" mnemonicParsing="false" onMouseClicked="#iniciar" text="INICIAR" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="408.0">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
+            <VBox alignment="CENTER" layoutX="185.0" layoutY="307.0" prefHeight="76.0" prefWidth="262.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="185.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PROTOCOLOS">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Text>
+                  <ChoiceBox fx:id="menuProtocolosCamadaFisica" prefWidth="150.0" styleClass="button" />
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets bottom="20.0" top="20.0" />
+               </opaqueInsets>
+            </VBox>
+            <Label layoutX="118.0" layoutY="229.0" prefHeight="85.0" prefWidth="390.0" style="-fx-text-fill: black;" text="Trabalho prático sobre os protocolos da CAMADA FÍSICA da Ethernet" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="200.0">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
          </children>
-      </Group>
+      </AnchorPane>
    </children>
 </AnchorPane>

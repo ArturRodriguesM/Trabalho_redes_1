@@ -10,6 +10,8 @@
 
 import controller.*;
 import javafx.application.Application;
+import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**************************************************************** <p>
@@ -30,9 +32,11 @@ public class Principal extends Application {
   *************************************************************** */
   @Override
   public void start(Stage palco) throws Exception {
-    Controlador controladorInterface = new Controlador("Interface.fxml");
+    // Font.loadFont(Principal.class.getResourceAsStream("view/ARIAL.ttf"), 20);
+    Controlador controladorInterface = new Controlador("Interface.fxml", "../index.css");
     palco = Declarador.getG_Palco();
     palco.setTitle("MSN (Marlos Sem Net)");
+    palco.getIcons().add(new Image("./img/icone_msn_w2.png"));
     palco.setResizable(false);
     palco.sizeToScene();
     controladorInterface.abrir();

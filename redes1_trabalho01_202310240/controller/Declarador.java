@@ -33,15 +33,30 @@ public class Declarador {
   * Metodo: Declarador
   * Funcao: Construtor da classe Declarador. Torna o qualquer objeto 
             declarado como Controlador do arquivo fxml de entrada
-  * Parametros: Nome do arquivo fxml a ser controlado; arquivo FXML
-  * Retorno: Metodo construtor nao possui retorno
+  @param arquivo arquivo FXML da interface
+  @return <code>N/A</code> novo declarador
   *************************************************************** */
   public Declarador(String arquivo) throws Exception {
+    this(arquivo, "");
+  }
+
+  /****************************************************************
+  * Metodo: Declarador
+  * Funcao: Construtor da classe Declarador. Torna o qualquer objeto 
+            declarado como Controlador do arquivo fxml de entrada
+  @param arquivo arquivo FXML da interface
+  @param css arquivo de estilizacao
+  @return <code>N/A</code> novo declarador
+  *************************************************************** */
+  public Declarador(String arquivo, String css) throws Exception {
     carregador = new FXMLLoader(getClass().getResource("../view/" + arquivo));
     this.arquivo = arquivo;
     this.carregador.setController(this);
     elementos = this.carregador.load();
     cena = new Scene(elementos);
+    if (css != "") {
+      cena.getStylesheets().add(getClass().getResource(css).toExternalForm());
+    }
   }
 
   /****************************************************************

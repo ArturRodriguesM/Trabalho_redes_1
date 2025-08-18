@@ -1,0 +1,128 @@
+
+/* GERAL */
+.fundo {
+  -fx-background-image: url("img/fundo_windows.jpg");
+  -fx-background-position: center;
+}
+
+.fundo-borda-branca {
+  -fx-background-color:  rgb(110, 202, 243);
+  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 6, 0, 0, 0);
+  -fx-background-radius: 5px;
+  -fx-border-color: white;
+  -fx-border-width: 3px;
+  -fx-border-radius: 5px;
+}
+
+/* FUNDO TELA INICIAL */
+.fundo-inicio{
+  -fx-background-image: url("img/fundo_azul.jpeg");
+  -fx-background-repeat: no-repeat;
+  -fx-background-size: cover;
+  -fx-border-color: rgb(110, 202, 243);
+  -fx-border-width: 5px;
+}
+
+
+/* TEXTOS */
+.text-white, .button .text, .tab-label .text, .velocidade-label .text{
+  -fx-fill: white;
+  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+.text-black, .choice-box .text, .titulo .text{
+  -fx-fill: black;
+}
+
+/* BOTAO */
+.button {
+  -fx-background-color:  rgb(110, 202, 243);
+  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 6, 0.2, 0, 0);
+  -fx-background-radius: 5px;
+}
+
+.button .text:hover {
+  /* -fx-fill: white; */
+  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 0);
+}
+
+/* TAB PANE */
+.tab-pane {
+  -fx-border-color: black;
+  -fx-border-width: 0.2px;
+
+}
+.fundo-tab {
+  -fx-background-image: url("img/fundo_azul.jpeg");
+  -fx-background-repeat: no-repeat;
+  -fx-background-size: cover;
+}
+
+.tab-header-area {
+  -fx-padding: 5px;
+}
+
+.tab-header-background {
+  -fx-background-color:  rgb(110, 202, 243);
+  -fx-border-color: transparent transparent rgba(0, 0, 0, 0.479) transparent;
+  /* -fx-background-color: blue; */
+}
+
+.tab {
+  -fx-background-color: transparent;
+}
+
+.tab-label .text:hover {
+  /* -fx-fill: white; */
+  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 0);
+}
+
+
+
+/* CAIXA DE TEXTO entrada*/
+.caixa-texto-entrada {
+  -fx-border-width: 0.6px;
+  -fx-border-color: black;
+}
+.caixa-texto-entrada .text{
+  -fx-fill: black;
+  -fx-effect: none;
+}
+
+/* CAIXA DE TEXTO saida*/
+.caixa-texto-saida{
+  -fx-background-color: white;
+  -fx-border-width: 0.6px;
+  -fx-border-color: black;
+
+}
+.caixa-texto-saida .viewport {
+  -fx-background-color: white;
+}
+
+/* CONTROLE DE VELOCIDADE */
+
+.texto-velocidade {
+  -fx-fill: white;
+  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 12, 0.3, 0, 0);
+}
+
+.track {
+  -fx-background-color: white;
+  -fx-border-width: 0.6px;
+  -fx-border-color: black;
+  -fx-border-radius: 0.25em;
+  -fx-background-insets: 0px;
+  /* -fx-padding: 0; */
+}
+.thumb {
+  -fx-background-color: white;
+  -fx-border-width: 0.6px;
+  -fx-border-color: black;
+  -fx-border-radius: 1em;
+}
+
+/* MENU - ESCOLHA DE PROTOCOLOS*/
+.arrow {
+  -fx-background-color: white;
+}
