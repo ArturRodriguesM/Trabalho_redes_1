@@ -14,7 +14,6 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -22,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import model.*;
 
 /**************************************************************** <p>
  * Classe: Controlador <p>
@@ -53,12 +53,15 @@ public class Controlador extends Declarador implements Initializable {
   @FXML
   private ChoiceBox<String> menuProtocolosCamadaFisica;
 
+  /** camada de aplicacao do transmissor */
+  AplicacaoTransmissora aplicacaoTransmissora;
+
   /**************************************************************** <p>
   * Metodo: Controlador <p>
   * Funcao: construtor da classe controlador <p>
   @param arquivo arquivo de fxml da interface
   ****************************************************************/
-  public Controlador(String arquivo) throws Exception {
+  private Controlador(String arquivo) throws Exception {
     super(arquivo);
   }
 
@@ -68,8 +71,24 @@ public class Controlador extends Declarador implements Initializable {
   @param arquivo arquivo de fxml da interface
   @param css arquivo de estilizacao css
   ****************************************************************/
-  public Controlador(String arquivo, String css) throws Exception {
+  private Controlador(String arquivo, String css) throws Exception {
     super(arquivo, css);
+  }
+
+  /**************************************************************** <p>
+  * Metodo: getInstance <p>
+  * Funcao: retorna a instancia do singleton do controlador da interface <p>
+  @return <code>Declarador</code> retorna o builder do controller
+  ****************************************************************/
+  public static Controlador getInstance() throws Exception {
+    if (Declarador.instancia == null) {
+      if (Declarador.getCss().isEmpty()) {
+        Declarador.instancia = new Controlador(Declarador.getArquivo());
+      } else {
+        Declarador.instancia = new Controlador(Declarador.getArquivo(), Declarador.getCss());
+      }
+    }
+    return (Controlador) Declarador.instancia;
   }
 
   /**************************************************************** <p>
@@ -92,6 +111,9 @@ public class Controlador extends Declarador implements Initializable {
     //abre a tela de escolha dos protocolos e fecha a tela dos dispositivos
     telaDispositivos.setVisible(false);
     telaInicio.setVisible(true);
+
+    //declaracao da aplicacao transmissora
+    aplicacaoTransmissora = new AplicacaoTransmissora(caixaDeTextoEntrada);
   }
 
   /**************************************************************** <p>
@@ -104,6 +126,26 @@ public class Controlador extends Declarador implements Initializable {
   void escolherProtocolo(MouseEvent event) {
     telaDispositivos.setVisible(false);
     telaInicio.setVisible(true);
+  }
+
+  /**************************************************************** <p>
+  * Metodo: getProtocoloCamadaFisica <p>
+  * Funcao: retorna qual eh o protocolo selecionado pelo usuario para
+  a camada fisica <p>
+  @return <code>int</code> indice do protocolo gerado
+  ****************************************************************/
+  public int getProtocoloCamadaFisica() {
+    String protocolo = menuProtocolosCamadaFisica.getValue();
+    switch (protocolo) {
+      case "Binaria":
+        return 0;
+      case "Manchester":
+        return 1;
+      case "Manchester Diferencial":
+        return 2;
+      default:
+        return 0;
+    }
   }
 
   /**************************************************************** <p>
@@ -126,11 +168,8 @@ public class Controlador extends Declarador implements Initializable {
   *****************************************************************/
   @FXML
   public void enviarMensagem(MouseEvent event) {
-    String mensagem = caixaDeTextoEntrada.getText();
-    if (!mensagem.isEmpty()) {
-      System.out.println(mensagem);
-      adicionarNoChat(mensagem);
-    }
+    //a aplicacao transmissora lerá a caixa de texto quando o botao for pressionado
+    aplicacaoTransmissora.aplicacaoTransmissora();
   }
 
   /**************************************************************** <p>
@@ -139,7 +178,7 @@ public class Controlador extends Declarador implements Initializable {
   @param mensagem mensagem a ser adicionada
   @return <code>void</code> n/a
   ****************************************************************/
-  private void adicionarNoChat(String mensagem) {
+  public void adicionarNoChat(String mensagem) {
     Text texto = criarMensagem(mensagem);
     caixaDeTextoSaida.getChildren().add(texto);
     caixaDeTextoEntrada.setText("");
@@ -152,7 +191,7 @@ public class Controlador extends Declarador implements Initializable {
   @param mensagem conteudo da mensagem
   @return <code>Text</code> texto a ser adicionado na interface
   ****************************************************************/
-  public Text criarMensagem(String mensagem) {
+  private Text criarMensagem(String mensagem) {
     Text texto = new Text(mensagem);
     texto.setWrappingWidth(scrollPane.getWidth() - 20);
 

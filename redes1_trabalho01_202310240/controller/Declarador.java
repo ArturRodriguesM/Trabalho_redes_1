@@ -22,12 +22,14 @@ import javafx.stage.Stage;
 javafx com base em um arquivo FXML <p>
 ****************************************************************/
 public class Declarador {
-  private String arquivo; //nome do arquivo da classe
+  private static String arquivo; //nome do arquivo da classe
+  private static String css; //nome do arquivo da classe
   private FXMLLoader carregador; //objeto do arquivo fxml
   private AnchorPane elementos; //objeto dos elementos do arquivo fxml
   private Scene cena; //Cena em que o controlador e responsavel
   //O codigo possui um unico objeto do tipo STAGE, no qual eh global para todo o projeto.
   public static Stage g_Palco = new Stage();
+  public static Declarador instancia;
 
   /****************************************************************
   * Metodo: Declarador
@@ -36,7 +38,7 @@ public class Declarador {
   @param arquivo arquivo FXML da interface
   @return <code>N/A</code> novo declarador
   *************************************************************** */
-  public Declarador(String arquivo) throws Exception {
+  protected Declarador(String arquivo) throws Exception {
     this(arquivo, "");
   }
 
@@ -48,15 +50,32 @@ public class Declarador {
   @param css arquivo de estilizacao
   @return <code>N/A</code> novo declarador
   *************************************************************** */
-  public Declarador(String arquivo, String css) throws Exception {
-    carregador = new FXMLLoader(getClass().getResource("../view/" + arquivo));
-    this.arquivo = arquivo;
+  protected Declarador(String arquivo, String css) throws Exception {
+    Declarador.arquivo = arquivo;
+    Declarador.css = css;
+    carregador = new FXMLLoader(getClass().getResource("../view/" + Declarador.arquivo));
     this.carregador.setController(this);
     elementos = this.carregador.load();
     cena = new Scene(elementos);
-    if (css != "") {
+    if (!Declarador.css.isEmpty()) {
       cena.getStylesheets().add(getClass().getResource(css).toExternalForm());
     }
+  }
+
+  /**************************************************************** <p>
+  * Metodo: getInstance <p>
+  * Funcao: retorna a instancia do singleton do controlador da interface <p>
+  @return <code>Declarador</code> retorna o builder do controller
+  ****************************************************************/
+  public static Declarador getInstance() throws Exception {
+    if (instancia == null) {
+      if (css.isEmpty()) {
+        instancia = new Declarador(arquivo);
+      } else {
+        instancia = new Declarador(arquivo, css);
+      }
+    }
+    return instancia;
   }
 
   /****************************************************************
@@ -77,7 +96,7 @@ public class Declarador {
   * Parametros: N/A
   * Retorno: Respectivos atributos
   *************************************************************** */
-  public String getArquivo() {
+  public static String getArquivo() {
     return arquivo;
   }
 
@@ -97,14 +116,18 @@ public class Declarador {
     return g_Palco;
   }
 
+  public static String getCss() {
+    return css;
+  }
+
   /****************************************************************
   * Metodos: Setters
   * Funcao: Setters dos atributos da classe
   * Parametros: Respectivos atributos
   * Retorno: VOID
   *************************************************************** */
-  public void setArquivo(String arquivo) {
-    this.arquivo = arquivo;
+  public static void setArquivo(String newArquivo) {
+    arquivo = newArquivo;
   }
 
   public void setCarregador(FXMLLoader carregador) {
@@ -121,5 +144,9 @@ public class Declarador {
 
   public static void setG_Palco(Stage g_Palco) {
     Declarador.g_Palco = g_Palco;
+  }
+
+  public static void setCss(String newCss) {
+    css = newCss;
   }
 }
