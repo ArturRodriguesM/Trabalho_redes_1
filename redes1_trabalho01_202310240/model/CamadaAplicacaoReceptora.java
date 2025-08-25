@@ -28,7 +28,50 @@ public class CamadaAplicacaoReceptora {
   ****************************************************************/
   void camadaDeAplicacaoReceptora(int quadro[]) {
     String mensagem = "";
+    // int quantidadeBitsUteis = quantidadeDeBitsUteis(quadro);
 
+    for (int i = (quadro.length - 1); i >= 0; i--) { //repete para cada inteiro do quadro
+
+      while (quadro[i] != 0) { //enquanto o inteiro sendo lido tiver bits significativos...
+
+        int ascii = 0;
+        for (int j = 0; j < 8; j++) { //percorre a cada 8 bits e armazena em um inteiro ascii
+          int mascara = 1;
+
+          //abre espaco para mais bits pro ascii
+          ascii <<= 1;
+
+          // le o primeiro bit do quadro
+          ascii |= (mascara & quadro[i]);
+
+          //passa para o proximo bit
+          quadro[i] >>>= 1;
+        }
+
+        //adiciona o caractere na mensagem
+        mensagem = ((char) ascii) + mensagem;
+      }
+    }
+
+    // System.out.println("quantidade bits uteis: " + quantidadeBitsUteis);
     aplicacaoReceptora.aplicacaoReceptora(mensagem);
   }
+
+  int quantidadeDeBitsUteis(int vetor[]) {
+    int quantidadeBitsUteis = 0;
+    int tamanhoVetor = vetor.length;
+
+    //os n-1 inteiros sempre estao cheio de bits, apenas o ultimo que se deve realizar 
+    //analise de quantos bits tem
+    quantidadeBitsUteis += (tamanhoVetor - 1) * 32;
+
+    //conta quantos bits uteis tem ate o ultimo inteiro zerar
+    while (vetor[tamanhoVetor - 1] != 0) {
+      quantidadeBitsUteis += 8;
+      vetor[tamanhoVetor - 1] >>>= 8;
+    }
+
+    return quantidadeBitsUteis;
+  }
+
 }
