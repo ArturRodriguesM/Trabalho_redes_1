@@ -66,11 +66,8 @@ public class CamadaAplicacaoTransmissora {
       }
     }
 
-    for (int valor : quadro) {
-      System.out.println(Integer.toBinaryString(valor));
-    }
-    camadaAplicacaoReceptora.camadaDeAplicacaoReceptora(quadro);
-    //camadaFisicaTransmissora.camadaFisicaTransmissora(quadro);
+    // camadaAplicacaoReceptora.camadaDeAplicacaoReceptora(quadro);
+    camadaFisicaTransmissora.camadaFisicaTransmissora(quadro);
   }
 
 }

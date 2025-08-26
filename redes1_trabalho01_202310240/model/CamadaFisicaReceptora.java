@@ -61,8 +61,7 @@ public class CamadaFisicaReceptora {
   @return <code>int[]</code> quadro decodificado
   ****************************************************************/
   private int[] camadaFisicaReceptoraDecodificacaoBinaria(int[] fluxoBrutoDeBits) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'camadaFisicaReceptoraDecodificacaoBinaria'");
+    return fluxoBrutoDeBits;
   }
 
   /**************************************************************** <p>
@@ -73,7 +72,10 @@ public class CamadaFisicaReceptora {
   ****************************************************************/
   private int[] camadaFisicaReceptoraDecodificacaoManchester(int[] fluxoBrutoDeBits) {
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'camadaFisicaReceptoraDecodificacaoManchester'");
+    int quadro[] = {};
+    return quadro;
+    // throw new UnsupportedOperationException(
+    //     "Unimplemented method 'camadaFisicaReceptoraDecodificacaoManchesterDiferencial'");
   }
 
   /**************************************************************** <p>
@@ -87,4 +89,5 @@ public class CamadaFisicaReceptora {
     throw new UnsupportedOperationException(
         "Unimplemented method 'camadaFisicaReceptoraDecodificacaoManchesterDiferencial'");
   }
+
 }

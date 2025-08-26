@@ -57,21 +57,4 @@ public class CamadaAplicacaoReceptora {
     aplicacaoReceptora.aplicacaoReceptora(mensagem);
   }
 
-  int quantidadeDeBitsUteis(int vetor[]) {
-    int quantidadeBitsUteis = 0;
-    int tamanhoVetor = vetor.length;
-
-    //os n-1 inteiros sempre estao cheio de bits, apenas o ultimo que se deve realizar 
-    //analise de quantos bits tem
-    quantidadeBitsUteis += (tamanhoVetor - 1) * 32;
-
-    //conta quantos bits uteis tem ate o ultimo inteiro zerar
-    while (vetor[tamanhoVetor - 1] != 0) {
-      quantidadeBitsUteis += 8;
-      vetor[tamanhoVetor - 1] >>>= 8;
-    }
-
-    return quantidadeBitsUteis;
-  }
-
 }
