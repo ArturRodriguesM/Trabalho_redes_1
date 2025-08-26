@@ -29,9 +29,10 @@ public class MeioDeComunicacao {
   @return <code>void</code> n/a
   ****************************************************************/
   void meioDeComunicacao(int fluxoBrutoDeBits[]) {
-    int fluxoBrutoDeBitsPontoA[], fluxoBrutoDeBitsPontoB[] = {};
+    int fluxoBrutoDeBitsPontoA[], fluxoBrutoDeBitsPontoB[] = new int[fluxoBrutoDeBits.length];
     fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
-    int qtdBitsSignificativos = 0;
+    //TODO: fazer passagem de bit a bit
+    int qtdBitsSignificativos = fluxoBrutoDeBits.length;
 
     for (int i = 0; i < qtdBitsSignificativos; i++) {
       //escovacao de bits

@@ -71,11 +71,60 @@ public class CamadaFisicaReceptora {
   @return <code>int[]</code> quadro decodificado
   ****************************************************************/
   private int[] camadaFisicaReceptoraDecodificacaoManchester(int[] fluxoBrutoDeBits) {
-    // TODO Auto-generated method stub
-    int quadro[] = {};
+    //a quantidade de bits uteis recebida no meio de comunicacao eh sempre o drobro
+    //da quantidade de bits da mensagem
+    int qtdBitsUteis = ContarBits.quantidadeDeBitsUteis(fluxoBrutoDeBits.clone()) / 2;
+
+    System.out.println("quantidade bits uteis : " + qtdBitsUteis);
+
+    //calcula quantos inteiros de 32 bits sao necessarios para transmitir a mensagem
+    //como eh necessario arredondar para cima, faz qtdBitsUteis + 31
+    int quadro[] = new int[(qtdBitsUteis + 31) / 32];
+
+    int indiceQuadro = 0;
+    int bitsInseridos = 0;
+
+    for (int i = (fluxoBrutoDeBits.length - 1); i >= 0; i--) { //para todos os inteiros recebidos...
+
+      //como na codificacao manchester, SEMPRE ha 2 sinais distintos por bit, eh possivel
+      //identificar quando os sinais acabaram em um inteiro (quando seu valor chegar em 0)
+      while (fluxoBrutoDeBits[i] != 0) { //enquanto houver bits a serem lidos nesse inteiro...
+
+        //abro espaco no quadro para 1 novo bit
+        quadro[indiceQuadro] <<= 1;
+
+        int mascara = 2; //a analise eh feita de 2 em 2 sinais
+        int sinais = 0 | (mascara & fluxoBrutoDeBits[i]); //armazena os 2 primeiros sinais
+        fluxoBrutoDeBits[i] >>>= 2; //avança para os proximos 2 sinais
+
+        int altoBaixo = (1 << 1);
+        // int baixoAlto = 1;
+
+        int bitAInserir = 0;
+
+        if (sinais == altoBaixo) {
+          bitAInserir = 1;
+        } else {
+          bitAInserir = 0;
+        }
+
+        quadro[indiceQuadro] |= bitAInserir;
+        // System.out.println("indiceQuadro" + indiceQuadro);
+        // System.out.println("quadro atual: " + quadro[indiceQuadro]);
+
+        bitsInseridos++;
+
+        if (bitsInseridos % 32 == 0) {
+          indiceQuadro++;
+          bitsInseridos = 0;
+        }
+      }
+    }
+    for (int valor : quadro) {
+      System.out.println(Integer.toBinaryString(valor));
+    }
+
     return quadro;
-    // throw new UnsupportedOperationException(
-    //     "Unimplemented method 'camadaFisicaReceptoraDecodificacaoManchesterDiferencial'");
   }
 
   /**************************************************************** <p>
