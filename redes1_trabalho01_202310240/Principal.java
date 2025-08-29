@@ -31,7 +31,7 @@ public class Principal extends Application {
   *************************************************************** */
   @Override
   public void start(Stage palco) throws Exception {
-    Declarador.setArquivo("interface.fxml");
+    Declarador.setArquivo("Interface.fxml");
     Declarador.setCss("../index.css");
     Controlador controladorInterface = Controlador.getInstance();
     // Controlador controladorInterface = new Controlador("Interface.fxml", "../index.css");

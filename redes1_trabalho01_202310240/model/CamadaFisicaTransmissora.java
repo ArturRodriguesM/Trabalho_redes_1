@@ -72,13 +72,12 @@ public class CamadaFisicaTransmissora {
    ****************************************************************/
   private int[] camadaFisicaTransmissoraCodificacaoManchester(int[] quadro) {
     //a codificacao manchester dobra a quantidade de bits uteis transmitidos
-
     int quantidadeBitsUteis = ContarBits.quantidadeDeBitsUteis(quadro.clone()) * 2;
 
     //calcula quantos inteiros de 32 bits sao necessarios para transmitir a mensagem
     //como eh necessario arredondar para cima, faz quantidadeBitsUteis + 31
     int[] fluxoBrutoDeBits = new int[(quantidadeBitsUteis + 31) / 32];
-    
+
     System.out.println("tamanho fluxo bruto de bits " + fluxoBrutoDeBits.length);
 
     int indiceFluxoBrutoDeBits = 0; //indice para acessar o fluxo bruto de bits
@@ -137,7 +136,15 @@ public class CamadaFisicaTransmissora {
   @return <code>int[]</code> fluxo de bits codificados
   ****************************************************************/
   private int[] camadaFisicaTransmissoraCodificacaoManchesterDiferencial(int[] quadro) {
-    int fluxoBrutoDeBits[] = {};
+    //a codificacao manchester dobra a quantidade de bits uteis transmitidos
+    int quantidadeBitsUteis = ContarBits.quantidadeDeBitsUteis(quadro.clone()) * 2;
+
+    //calcula quantos inteiros de 32 bits sao necessarios para transmitir a mensagem
+    //como eh necessario arredondar para cima, faz quantidadeBitsUteis + 31
+    int[] fluxoBrutoDeBits = new int[(quantidadeBitsUteis + 31) / 32];
+
+    //indice do bit sendo lido
+    int i = 1;
     return fluxoBrutoDeBits;
   }
 
