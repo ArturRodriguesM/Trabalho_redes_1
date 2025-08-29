@@ -91,7 +91,7 @@ public class CamadaFisicaReceptora {
         //abro espaco no quadro para 1 novo bit
         quadro[indiceQuadro] <<= 1;
 
-        int mascara = 2; //a analise eh feita de 2 em 2 sinais
+        int mascara = 3; //a analise eh feita de 2 em 2 sinais (3 = 11 em binario, por isso consegue ler 2 sinais)
         int sinais = 0 | (mascara & fluxoBrutoDeBits[i]); //armazena os 2 primeiros sinais
         fluxoBrutoDeBits[i] >>>= 2; //avança para os proximos 2 sinais
 
