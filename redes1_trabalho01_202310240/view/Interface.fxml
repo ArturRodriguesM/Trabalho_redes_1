@@ -20,8 +20,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" styleClass="fundo" stylesheets="@../index.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="telaDispositivos" layoutX="60.0" layoutY="60.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="60.0">
+      <AnchorPane fx:id="telaDispositivos" layoutX="60.0" layoutY="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="60.0">
          <children>
+            <ImageView fitHeight="200.0" fitWidth="700.0" layoutX="90.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0">
+               <image>
+                  <Image url="@../img/osciloscopio.png" />
+               </image>
+            </ImageView>
             <VBox alignment="CENTER" layoutX="340.0" layoutY="140.0" prefHeight="76.0" prefWidth="191.0" spacing="10.0" styleClass="fundo-borda-branca" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0">
                <children>
                   <Label styleClass="velocidade-label" text="VELOCIDADE DE TRANSMISSAO" textAlignment="CENTER" wrapText="true" />

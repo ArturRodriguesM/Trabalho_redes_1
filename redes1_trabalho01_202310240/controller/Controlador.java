@@ -87,12 +87,12 @@ public class Controlador extends Declarador implements Initializable {
     for (int i = 0; i < 12; i++) { //adiciona-se 12 paineis de visualizacao da onda na interface
       ImageView temporario = new ImageView(Sinais.LOW.getImagem()); //inicia-se todos com low
       animacaoOnda.add(temporario);
-      this.getElementos().getChildren().add(temporario); //adiciona-se na interface
+      telaDispositivos.getChildren().add(temporario); //adiciona-se na interface
 
       //posicionamento do elemento na interface
-      temporario.toBack();
-      AnchorPane.setLeftAnchor(temporario, 150.0 + i * 50);
-      AnchorPane.setBottomAnchor(temporario, 185.0);
+      temporario.toFront(); //traz pra frente na interface
+      AnchorPane.setLeftAnchor(temporario, 140 + i * 50.0);
+      AnchorPane.setBottomAnchor(temporario, 121.0);
     }
 
   }
