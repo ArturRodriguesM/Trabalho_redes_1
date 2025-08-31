@@ -4,7 +4,7 @@
 * Inicio           : 18/08/2025 <p>
 * Ultima alteracao : 18/08/2025 <p>
 * Nome             : CamadaFisicaTransmissora.java <p>
-* Funcao           : Simular a camada física de rede para o 
+* Funcao           : Simular a camada fisica de rede para o 
 dispositivo transmissor <p>
 *************************************************************** */
 package model;
@@ -13,7 +13,7 @@ import controller.Controlador;
 
 /**************************************************************** <p>
 * Classe: CamadaFisicaTransmissora <p>
-* Funcao: Simular a camada física de rede para o 
+* Funcao: Simular a camada fisica de rede para o 
 dispositivo transmissor <p>
 ****************************************************************/
 public class CamadaFisicaTransmissora {
@@ -78,18 +78,13 @@ public class CamadaFisicaTransmissora {
     //como eh necessario arredondar para cima, faz quantidadeBitsUteis + 31
     int[] fluxoBrutoDeBits = new int[(quantidadeBitsUteis + 31) / 32];
 
-    System.out.println("tamanho fluxo bruto de bits " + fluxoBrutoDeBits.length);
-
     int indiceFluxoBrutoDeBits = 0; //indice para acessar o fluxo bruto de bits
     int qtdBitsInseridos = 0; //conta quantos bits foram inseridos no fluxo bruto de bits
 
     for (int indiceQuadro = (quadro.length - 1); indiceQuadro >= 0; indiceQuadro--) { //para cada inteiro pertencente ao quadro
-      System.out.println(
-          "indice quadro: " + indiceQuadro);
 
       while (quadro[indiceQuadro] != 0) { // enquanto houver bits uteis no inteiro...
-        System.out.println(
-            " valor quadro: " + Integer.toBinaryString(quadro[indiceQuadro]));
+
         for (int numBitsLidos = 0; numBitsLidos < 8; numBitsLidos++) { // para cada 8 bits presente no quadro...
 
           //abre espaco para os 2 novos bits a serem transmitidos
@@ -122,10 +117,6 @@ public class CamadaFisicaTransmissora {
       }
     }
 
-    for (int valor : fluxoBrutoDeBits) {
-      System.out.println(Integer.toBinaryString(valor));
-    }
-
     return fluxoBrutoDeBits;
   }
 
@@ -136,7 +127,6 @@ public class CamadaFisicaTransmissora {
   @return <code>int[]</code> fluxo de bits codificados
   ****************************************************************/
   private int[] camadaFisicaTransmissoraCodificacaoManchesterDiferencial(int[] quadro) {
-    System.out.println("camada fisica transmissora: ");
 
     //a codificacao manchester dobra a quantidade de bits uteis transmitidos
     int quantidadeBitsUteis = ContarBits.quantidadeDeBitsUteis(quadro.clone()) * 2;
@@ -209,11 +199,6 @@ public class CamadaFisicaTransmissora {
         }
         j = 0;
       }
-    }
-
-    System.out.println("fluxo bruto de bits: ");
-    for (int valor : fluxoBrutoDeBits) {
-      System.out.println(Integer.toBinaryString(valor));
     }
 
     return fluxoBrutoDeBits;

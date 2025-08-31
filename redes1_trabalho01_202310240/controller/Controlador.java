@@ -15,8 +15,10 @@ import java.util.concurrent.Semaphore;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -37,13 +39,29 @@ public class Controlador extends Declarador implements Initializable {
   /** objeto responsavel pela animacao da onda na interface */
   AnimacaoOnda animacaoOnda;
 
+  /** controla a velocidade da onda de transmissao */
+  @FXML
+  private Slider controleVelocidadeOnda;
+
+  /** escolhe o protocolo de transmissao */
+  @FXML
+  private Button botaoEscolherProtocolo;
+
   /** caixa de texto responsavel pela entrada de mensagens na aplicacao */
   @FXML
   private TextArea caixaDeTextoEntrada;
 
+  /** botao de enviar mensagem do transmissor */
+  @FXML
+  private Button botaoEnviar;
+
   /** caixa de texto responsavel pela saida de mensagens na aplciacao  */
   @FXML
   private VBox caixaDeTextoSaida;
+
+  /** botao limpar chat do receptor */
+  @FXML
+  private Button botaoLimparChat;
 
   /** barra de rolamento do conteudo da saida de mensagens */
   @FXML
@@ -81,20 +99,6 @@ public class Controlador extends Declarador implements Initializable {
   ****************************************************************/
   private Controlador(String arquivo, String css) throws Exception {
     super(arquivo, css);
-
-    animacaoOnda = new AnimacaoOnda();
-    //Declaracao das imagens do fio transmissor de dados    
-    for (int i = 0; i < 12; i++) { //adiciona-se 12 paineis de visualizacao da onda na interface
-      ImageView temporario = new ImageView(Sinais.LOW.getImagem()); //inicia-se todos com low
-      animacaoOnda.add(temporario);
-      telaDispositivos.getChildren().add(temporario); //adiciona-se na interface
-
-      //posicionamento do elemento na interface
-      temporario.toFront(); //traz pra frente na interface
-      AnchorPane.setLeftAnchor(temporario, 140 + i * 50.0);
-      AnchorPane.setBottomAnchor(temporario, 121.0);
-    }
-
   }
 
   /**************************************************************** <p>
@@ -120,8 +124,6 @@ public class Controlador extends Declarador implements Initializable {
    ****************************************************************/
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    System.out.println("Controlador declarado");
-
     caixaDeTextoSaida.heightProperty().addListener((obs, oldVal, newVal) -> {
       scrollPane.setVvalue(1.0); //sempre que for adicionada uma mensagem, faz com que o sroll fique em baixo
     });
@@ -137,6 +139,18 @@ public class Controlador extends Declarador implements Initializable {
     //declaracao da aplicacao transmissora
     aplicacaoTransmissora = new AplicacaoTransmissora(caixaDeTextoEntrada);
 
+    animacaoOnda = new AnimacaoOnda(controleVelocidadeOnda);
+    //Declaracao das imagens do fio transmissor de dados    
+    for (int i = 0; i < 12; i++) { //adiciona-se 12 paineis de visualizacao da onda na interface
+      ImageView temporario = new ImageView(Sinais.LOW.getImagem()); //inicia-se todos com low
+      animacaoOnda.add(temporario);
+      telaDispositivos.getChildren().add(temporario); //adiciona-se na interface
+
+      //posicionamento do elemento na interface
+      temporario.toFront(); //traz pra frente na interface
+      AnchorPane.setLeftAnchor(temporario, 140 + i * 50.0);
+      AnchorPane.setBottomAnchor(temporario, 121.0);
+    }
   }
 
   /**************************************************************** <p>
@@ -192,19 +206,34 @@ public class Controlador extends Declarador implements Initializable {
   @FXML
   public void enviarMensagem(MouseEvent event) {
 
-    //como a thread que chama esse metodo eh a thread do Javafx, 
+    //como a thread que chama esse metodo eh a thread do Javafx (pois envia-se
+    //uma mensagem quando o botao da interface eh clicado), 
     //eh necessario criar outra responsavel pelo processamento dos protocolos, 
-    //pois assim separa-se a thread que realiza a animacao da thread que 
-    //aplica os algoritmos de rede. Importante para sincronizar os sinais
-    //que sao enviados para a comunicacao
+    //pois assim separa-se a thread que realiza a animacao da que 
+    //aplica os algoritmos de rede. Importante para sincronizar os sinais de comunicacao
+    //que sao enviados para a animacao
     Thread comunicacao = new Thread() {
       @Override
       public void run() {
-        //a aplicacao transmissora lerá a caixa de texto quando o botao for pressionado
+        //a aplicacao transmissora lera a caixa de texto quando o botao for pressionado
         aplicacaoTransmissora.aplicacaoTransmissora();
       }
     };
     comunicacao.start();
+  }
+
+  /**************************************************************** <p>
+  * Metodo: desabilitarEnvioMensagens <p>
+  * Funcao: desabilita ou habilita o envio de mensagens enquanto do 
+  transmissor <p>
+  @param value valor booleano decidindo se desabilita ou habilita
+  @return <code>void</code> n/a
+  ****************************************************************/
+  public void desabilitarEnvioMensagens(boolean value) {
+    caixaDeTextoEntrada.setDisable(value);
+    botaoEnviar.setDisable(value);
+    botaoEscolherProtocolo.setDisable(value);
+    botaoLimparChat.setDisable(value);
   }
 
   /**************************************************************** <p>
@@ -216,6 +245,15 @@ public class Controlador extends Declarador implements Initializable {
 
   public void animarSinal(int sinal) {
     animacaoOnda.recebeSinal(sinal);
+  }
+
+  /**************************************************************** <p>
+  * Metodo: zerarOnda <p>
+  * Funcao: zera a onda de transmissao depois de enviar todos os bits <p>
+  @return <code>void</code> n/a
+  ****************************************************************/
+  public void zerarOnda() {
+    animacaoOnda.zerarOnda();
   }
 
   /**************************************************************** <p>

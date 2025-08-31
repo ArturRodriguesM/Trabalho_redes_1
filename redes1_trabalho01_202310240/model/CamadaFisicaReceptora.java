@@ -4,7 +4,7 @@
 * Inicio           : 21/08/2025 <p>
 * Ultima alteracao : 21/08/2025 <p>
 * Nome             : CamadaFisicaReceptora.java <p>
-* Funcao           : Simular a camada física de rede para o 
+* Funcao           : Simular a camada fisica de rede para o 
 dispositivo receptor <p>
 *************************************************************** */
 
@@ -14,7 +14,7 @@ import controller.Controlador;
 
 /**************************************************************** <p>
 * Classe: CamadaFisicaReceptora <p>
-* Funcao: Simular a camada física de rede para o 
+* Funcao: Simular a camada fisica de rede para o 
 dispositivo receptor <p>
 ****************************************************************/
 public class CamadaFisicaReceptora {
@@ -93,7 +93,7 @@ public class CamadaFisicaReceptora {
 
         int mascara = 3; //a analise eh feita de 2 em 2 sinais (3 = 11 em binario, por isso consegue ler 2 sinais)
         int sinais = 0 | (mascara & fluxoBrutoDeBits[i]); //armazena os 2 primeiros sinais
-        fluxoBrutoDeBits[i] >>>= 2; //avança para os proximos 2 sinais
+        fluxoBrutoDeBits[i] >>>= 2; //avanca para os proximos 2 sinais
 
         int altoBaixo = (1 << 1);
         // int baixoAlto = 1;
@@ -106,22 +106,17 @@ public class CamadaFisicaReceptora {
           bitAInserir = 0;
         }
 
+        //insere o bit no quadro
         quadro[indiceQuadro] |= bitAInserir;
-        // System.out.println("indiceQuadro" + indiceQuadro);
-        // System.out.println("quadro atual: " + quadro[indiceQuadro]);
-
         bitsInseridos++;
 
+        //verifica se o inteiro encheu
         if (bitsInseridos % 32 == 0) {
           indiceQuadro++;
           bitsInseridos = 0;
         }
       }
     }
-    for (int valor : quadro) {
-      System.out.println(Integer.toBinaryString(valor));
-    }
-
     return quadro;
   }
 
@@ -132,7 +127,6 @@ public class CamadaFisicaReceptora {
   @return <code>int[]</code> quadro decodificado
   ****************************************************************/
   private int[] camadaFisicaReceptoraDecodificacaoManchesterDiferencial(int[] fluxoBrutoDeBits) {
-    System.out.println("camada fisica receptora: ");
 
     //a quantidade de sinais uteis recebida no meio de comunicacao eh sempre o drobro
     //da quantidade de bits da mensagem
@@ -142,7 +136,7 @@ public class CamadaFisicaReceptora {
     //como eh necessario arredondar para cima, faz qtdBitsUteis + 31
     int quadro[] = new int[(qtdBitsUteis + 31) / 32];
 
-    //lê-se os 2 primeiros sinais e armazena como o anteriores
+    //le-se os 2 primeiros sinais e armazena como o anteriores
     int mascara = 3;
     int sinaisAnteriores = (mascara & (fluxoBrutoDeBits[fluxoBrutoDeBits.length - 1]));
     fluxoBrutoDeBits[fluxoBrutoDeBits.length - 1] >>>= 2; //avanca para leitura dos proximos 2 sinais
@@ -191,12 +185,6 @@ public class CamadaFisicaReceptora {
     //abre espaco e adiciona o bit no quadro
     quadro[indiceQuadro] <<= 1;
     quadro[indiceQuadro] |= bit;
-
-    System.out.println("quadro: ");
-
-    for (int valor : quadro) {
-      System.out.println(Integer.toBinaryString(valor));
-    }
 
     return quadro;
   }

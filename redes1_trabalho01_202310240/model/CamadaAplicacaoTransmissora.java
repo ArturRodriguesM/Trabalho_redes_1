@@ -39,16 +39,12 @@ public class CamadaAplicacaoTransmissora {
       vetorAscii[i] = (int) (mensagem.charAt(i));
     }
 
-    for (int valor : vetorAscii) {
-      System.out.println(Integer.toBinaryString(valor));
-    }
-
     int indiceInteiro = 0;
     for (int i = 1; i <= vetorAscii.length * 8; i++) { //deve-se percorrer todos os BITS das letras
       int mascara = 1;
 
       // como cada inteiro do vetor de ascii possui 8 bits, entao o indice deve ser o valor de i / 8
-      // ex.: se i esta no 7º bit, entao ele esta armazenado no inteiro 0 (7/8 = 0)
+      // ex.: se i esta no setimo bit, entao ele esta armazenado no inteiro 0 (7/8 = 0)
       int indiceVetorAscii = (i - 1) / 8;
 
       //abre espaco para o proximo bit entrar no quadro

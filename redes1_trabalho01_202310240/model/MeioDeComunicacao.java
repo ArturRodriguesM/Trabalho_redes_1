@@ -41,11 +41,6 @@ public class MeioDeComunicacao {
       fluxoBrutoDeBitsPontoB[i] = 0;
     }
 
-    // System.out.println("fluxo de bits do ponto A: ");
-    // for (int valor : fluxoBrutoDeBitsPontoA) {
-    //   System.out.println(Integer.toBinaryString(valor));
-    // }
-
     int qtdBitsSignificativos = ContarBits.quantidadeDeBitsUteis(fluxoBrutoDeBitsPontoA.clone());
 
     //itera pelos inteiros que armazenam sinais
@@ -70,7 +65,7 @@ public class MeioDeComunicacao {
         e.printStackTrace();
       }
 
-      //terceiro - adiciona o sinal e faz a mascara avançar para o proximo sinal
+      //terceiro - adiciona o sinal e faz a mascara avancar para o proximo sinal
       fluxoBrutoDeBitsPontoB[indiceFluxoDeBits] |= sinal;
       mascara <<= 1;
       sinal = 0;
@@ -83,10 +78,13 @@ public class MeioDeComunicacao {
 
     }
 
-    // System.out.println("fluxo de bits do ponto B: ");
-    // for (int valor : fluxoBrutoDeBitsPontoB) {
-    //   System.out.println(Integer.toBinaryString(valor));
-    // }
+    //depois de enviar todos os bits, zera-se a onda completamente
+    try {
+      Controlador.getInstance().zerarOnda();
+      Controlador.sincronizacaoRedeAnimacao.acquire(); //espera a interface terminar a animacao de zerar onda
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
     camadaFisicaReceptora.camadaFisicaReceptora(fluxoBrutoDeBitsPontoB);
   }

@@ -11,6 +11,7 @@ package model;
 
 import java.util.LinkedList;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import java.util.ListIterator;
 
@@ -25,16 +26,30 @@ import javafx.util.Duration;
 * Funcao: anima a onda na interface <p>
 ****************************************************************/
 public class AnimacaoOnda extends LinkedList<ImageView> {
+  /** itera pelos sinais do fio */
   ListIterator<ImageView> sinaisDoFio;
+  /** objeto responsavel pela animacao da onda */
   Timeline timeline = new Timeline();
+  /** slider de velocidade da onda */
+  Slider controleVelocidade;
 
   /**************************************************************** <p>
   * Metodo: AnimacaoOnda <p>
   * Funcao: construtor da classe AnimacaoOnda <p>
   ****************************************************************/
   public AnimacaoOnda() {
+    this(null);
+  }
+
+  /**************************************************************** <p>
+   * Metodo: AnimacaoOnda <p>
+   * Funcao: construtor da classe animacaoOnda <p>
+   @param controleVelocidade controla a velocidade da onda
+   ****************************************************************/
+  public AnimacaoOnda(Slider controleVelocidade) {
     //indica que sempre que a animacao acabar, ele chamara o metodo "enviarFimDaAnimacaoSinal"
     timeline.setOnFinished((ActionEvent e) -> enviarFimDaAnimacaoSinal());
+    this.controleVelocidade = controleVelocidade;
   }
 
   /**************************************************************** <p>
@@ -67,8 +82,6 @@ public class AnimacaoOnda extends LinkedList<ImageView> {
     //seleciona o sinal que esta no meio de comunicacao atual
     ImageView primeiroDoFio = this.getFirst();
     Image retorno = null;
-    // Imagens debug = Imagens.getInstance(primeiroDoFio.getImage());
-    //System.out.println("sinal sendo animado : " + sinal + " sinal que estava no fio antes: " + debug.getUrl());
 
     if (primeiroDoFio.getImage() == Sinais.LOW.getImagem()
         || primeiroDoFio.getImage() == Sinais.LOWTRANSICAO.getImagem()) {
@@ -120,43 +133,50 @@ public class AnimacaoOnda extends LinkedList<ImageView> {
   public void enviarFimDaAnimacaoSinal() {
     //limpa o objeto de animacao para animar-se novamente
     timeline.getKeyFrames().clear();
-    System.out.println("THREAD QUE ESTA LIBERANDO O SEMAFORO: " + Thread.currentThread());
     //libera o meio de comunicacao para enviar outro sinal
     Controlador.sincronizacaoRedeAnimacao.release();
   }
 
-  // public void zerarFio() {
-  //   Timeline animacaoZerarFio = new Timeline();
-  //   KeyFrame keyFrame;
-  //   //olhar se o ultimo eh 0 ou 1
-  //   ImageView primeiroDoFio = this.getFirst();
-  //   if (primeiroDoFio.getImage() == Imagens.LOW.getImagem()) {
-  //     //mandar 0 sem transicao
-  //     keyFrame = new KeyFrame(getTempo(), (ActionEvent e) -> {
-  //       passaSinalProximo(Imagens.LOW.getImagem());
-  //     });
-  //     animacaoZerarFio.getKeyFrames().add(keyFrame);
+  /**************************************************************** <p>
+  * Metodo: zerarOnda <p>
+  * Funcao: zera a onda quando todos os bits para serem transmitidos
+  forem enviados <p>
+  @return <code>void</code> n/a
+  ****************************************************************/
+  public void zerarOnda() {
+    KeyFrame keyFrame;
+    ImageView primeiroDoFio = this.getFirst();
+    Image primeiroSinal;
 
-  //   } else {
-  //     //mandar 0 com transicao
-  //     keyFrame = new KeyFrame(getTempo(), (ActionEvent e) -> {
-  //       passaSinalProximo(Imagens.LOWTRANSICAO.getImagem());
-  //     });
-  //     animacaoZerarFio.getKeyFrames().add(keyFrame);
-  //   }
+    //primeiro - analise do sinal que ha na onda no momento
+    if (primeiroDoFio.getImage() == Sinais.LOW.getImagem()
+        || primeiroDoFio.getImage() == Sinais.LOWTRANSICAO.getImagem()) {
+      //se ja tiver um sinal BAIXO na onda, entao deve-se inserir um sinal baixo se transicao
+      primeiroSinal = Sinais.LOW.getImagem();
+    } else {
+      //se tiver um sinal ALTO, entao deve-se inserir um sinal baixo com transicao
+      primeiroSinal = Sinais.LOWTRANSICAO.getImagem();
+    }
 
-  //   //zerar os outros 11 com um for
-  //   for (int i = 2; i <= 12; i++) {
-  //     keyFrame = new KeyFrame(getTempo().multiply(i), (ActionEvent e) -> {
-  //       passaSinalProximo(Imagens.LOW.getImagem());
-  //     });
-  //     animacaoZerarFio.getKeyFrames().add(keyFrame);
-  //   }
+    //adiciona o sinal na fila pra animar
+    keyFrame = new KeyFrame(getTempo(), (ActionEvent e) -> {
+      passaSinalProximo(primeiroSinal);
+    });
+    timeline.getKeyFrames().add(keyFrame);
 
-  //   animacaoZerarFio.setOnFinished(((ActionEvent e) -> controlador.fimDaTransmissao()));
-  //   animacaoZerarFio.play();
+    //para todos os paineis existentes na lista de sinais....
+    for (int i = 2; i <= 12; i++) {
+      //preenche-se todos com low
+      keyFrame = new KeyFrame(getTempo().multiply(i), (ActionEvent e) -> {
+        passaSinalProximo(Sinais.LOW.getImagem());
+      });
+      timeline.getKeyFrames().add(keyFrame);
+    }
 
-  // }
+    //inicia-se a animacao
+    timeline.play();
+
+  }
 
   /**************************************************************** <p>
   * Metodo: add <p>
@@ -179,7 +199,7 @@ public class AnimacaoOnda extends LinkedList<ImageView> {
   @return <code>Duration</code> tempo em milissegundos
   ****************************************************************/
   public Duration getTempo() {
-    return new Duration(1000);
+    return new Duration(1000 / controleVelocidade.getValue());
   }
 
 }

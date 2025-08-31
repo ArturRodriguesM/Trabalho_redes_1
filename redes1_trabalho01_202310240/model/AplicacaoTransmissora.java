@@ -10,6 +10,7 @@ com o usuario <p>
 
 package model;
 
+import controller.Controlador;
 import javafx.scene.control.TextArea;
 
 /**************************************************************** <p>
@@ -42,7 +43,13 @@ public class AplicacaoTransmissora {
   ****************************************************************/
   public void aplicacaoTransmissora() {
     String mensagem = caixaDeTextoEntrada.getText();
-    if (!mensagem.isEmpty()) {
+    if (!mensagem.isEmpty()) { //so envia se ha alguma mensagem na caixa de texto
+      try {
+        Controlador.getInstance().desabilitarEnvioMensagens(true);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+
       camadaAplicacaoTransmissora.camadaDeAplicacaoTransmissora(mensagem);
     }
   }

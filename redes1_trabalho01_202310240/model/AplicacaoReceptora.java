@@ -34,6 +34,7 @@ public class AplicacaoReceptora {
     Platform.runLater(() -> {
       try {
         Controlador.getInstance().adicionarNoChat(mensagem);
+        Controlador.getInstance().desabilitarEnvioMensagens(false);
       } catch (Exception e) {
         e.printStackTrace();
       }

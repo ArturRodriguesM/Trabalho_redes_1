@@ -53,7 +53,6 @@ public class CamadaAplicacaoReceptora {
       }
     }
 
-    // System.out.println("quantidade bits uteis: " + quantidadeBitsUteis);
     aplicacaoReceptora.aplicacaoReceptora(mensagem);
   }
 

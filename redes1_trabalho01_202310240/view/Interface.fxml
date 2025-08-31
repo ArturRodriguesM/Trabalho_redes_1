@@ -30,7 +30,7 @@
             <VBox alignment="CENTER" layoutX="340.0" layoutY="140.0" prefHeight="76.0" prefWidth="191.0" spacing="10.0" styleClass="fundo-borda-branca" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0">
                <children>
                   <Label styleClass="velocidade-label" text="VELOCIDADE DE TRANSMISSAO" textAlignment="CENTER" wrapText="true" />
-                  <Slider />
+                  <Slider fx:id="controleVelocidadeOnda" blockIncrement="1.0" majorTickUnit="1.0" max="50.0" min="2.0" minorTickCount="0" snapToTicks="true" value="25.0" />
                </children>
                <padding>
                   <Insets left="5.0" right="5.0" />
@@ -107,11 +107,6 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                <Tab text="Camada Física">
-                     <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="fundo-tab" />
-                     </content>
-                  </Tab>
               </tabs>
             </TabPane>
             <TabPane layoutX="555.0" prefHeight="294.0" prefWidth="325.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="50.0" AnchorPane.rightAnchor="0.0">
@@ -171,7 +166,7 @@
                                                 <Insets bottom="20.0" />
                                              </VBox.margin>
                                           </ScrollPane>
-                                          <Button mnemonicParsing="false" onMouseClicked="#limparChat" text="LIMPAR CHAT" />
+                                          <Button fx:id="botaoLimparChat" mnemonicParsing="false" onMouseClicked="#limparChat" text="LIMPAR CHAT" />
                                        </children>
                                        <padding>
                                           <Insets left="15.0" right="15.0" />
@@ -183,14 +178,9 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab text="Camada Física">
-                     <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="fundo-tab" />
-                     </content>
-                  </Tab>
                </tabs>
             </TabPane>
-            <Button layoutX="412.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#escolherProtocolo" text="ESCOLHER PROTOCOLO" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="60.0" />
+            <Button fx:id="botaoEscolherProtocolo" layoutX="412.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#escolherProtocolo" text="ESCOLHER PROTOCOLO" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="60.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="telaInicio" layoutX="193.0" layoutY="57.0" prefHeight="541.0" prefWidth="606.0" styleClass="fundo-inicio" visible="false" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
@@ -239,7 +229,7 @@
                   <Insets bottom="20.0" top="20.0" />
                </opaqueInsets>
             </VBox>
-            <Label layoutX="118.0" layoutY="229.0" prefHeight="85.0" prefWidth="390.0" style="-fx-text-fill: black;" text="Trabalho prático sobre os protocolos da CAMADA FÍSICA da Ethernet" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="200.0">
+            <Label layoutX="118.0" layoutY="229.0" prefHeight="85.0" prefWidth="390.0" style="-fx-text-fill: black;" text="Trabalho prático sobre os protocolos da CAMADA FÍSICA" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="200.0">
                <font>
                   <Font size="19.0" />
                </font>
