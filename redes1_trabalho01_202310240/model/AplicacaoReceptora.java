@@ -12,6 +12,7 @@ com o usuario  <p>
 package model;
 
 import controller.Controlador;
+import javafx.application.Platform;
 
 /**************************************************************** <p>
 * Classe: AplicacaoReceptora <p>
@@ -27,10 +28,15 @@ public class AplicacaoReceptora {
   @return <code>void</code> n/a
   ****************************************************************/
   void aplicacaoReceptora(String mensagem) {
-    try {
-      Controlador.getInstance().adicionarNoChat(mensagem);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+
+    //eh necessario adicionar a mensagem na interface, e, para acessar a thread
+    //da interface do javafx, utiliza-se o Platform.runLater();
+    Platform.runLater(() -> {
+      try {
+        Controlador.getInstance().adicionarNoChat(mensagem);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    });
   }
 }

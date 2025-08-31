@@ -11,12 +11,14 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.Semaphore;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -28,6 +30,12 @@ import model.*;
  * Funcao: Controle a animacao da interface <p>
  ****************************************************************/
 public class Controlador extends Declarador implements Initializable {
+
+  /** sincroniza a transmissao de sinais com a animacao da onda na interface*/
+  public static Semaphore sincronizacaoRedeAnimacao = new Semaphore(0);
+
+  /** objeto responsavel pela animacao da onda na interface */
+  AnimacaoOnda animacaoOnda;
 
   /** caixa de texto responsavel pela entrada de mensagens na aplicacao */
   @FXML
@@ -73,6 +81,20 @@ public class Controlador extends Declarador implements Initializable {
   ****************************************************************/
   private Controlador(String arquivo, String css) throws Exception {
     super(arquivo, css);
+
+    animacaoOnda = new AnimacaoOnda();
+    //Declaracao das imagens do fio transmissor de dados    
+    for (int i = 0; i < 12; i++) { //adiciona-se 12 paineis de visualizacao da onda na interface
+      ImageView temporario = new ImageView(Sinais.LOW.getImagem()); //inicia-se todos com low
+      animacaoOnda.add(temporario);
+      this.getElementos().getChildren().add(temporario); //adiciona-se na interface
+
+      //posicionamento do elemento na interface
+      temporario.toBack();
+      AnchorPane.setLeftAnchor(temporario, 150.0 + i * 50);
+      AnchorPane.setBottomAnchor(temporario, 185.0);
+    }
+
   }
 
   /**************************************************************** <p>
@@ -114,6 +136,7 @@ public class Controlador extends Declarador implements Initializable {
 
     //declaracao da aplicacao transmissora
     aplicacaoTransmissora = new AplicacaoTransmissora(caixaDeTextoEntrada);
+
   }
 
   /**************************************************************** <p>
@@ -168,8 +191,31 @@ public class Controlador extends Declarador implements Initializable {
   *****************************************************************/
   @FXML
   public void enviarMensagem(MouseEvent event) {
-    //a aplicacao transmissora lerá a caixa de texto quando o botao for pressionado
-    aplicacaoTransmissora.aplicacaoTransmissora();
+
+    //como a thread que chama esse metodo eh a thread do Javafx, 
+    //eh necessario criar outra responsavel pelo processamento dos protocolos, 
+    //pois assim separa-se a thread que realiza a animacao da thread que 
+    //aplica os algoritmos de rede. Importante para sincronizar os sinais
+    //que sao enviados para a comunicacao
+    Thread comunicacao = new Thread() {
+      @Override
+      public void run() {
+        //a aplicacao transmissora lerá a caixa de texto quando o botao for pressionado
+        aplicacaoTransmissora.aplicacaoTransmissora();
+      }
+    };
+    comunicacao.start();
+  }
+
+  /**************************************************************** <p>
+  * Metodo: animarSinal <p>
+  * Funcao: envia o sinal do parametro para a animar na interface <p>
+  @param sinal sinal a ser animado
+  @return <code>void</code> n/a
+  ****************************************************************/
+
+  public void animarSinal(int sinal) {
+    animacaoOnda.recebeSinal(sinal);
   }
 
   /**************************************************************** <p>
