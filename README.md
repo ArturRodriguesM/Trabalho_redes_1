@@ -33,7 +33,7 @@ O projeto segue o padrão **MVC (Model-View-Controller)** centralizado:
 1. Clone o repositório:
    ```bash
    git clone https://github.com/ArturRodriguesM/camada_fisica.git
-   cd Problema-dos-Trens
+   cd camada_fisica
    ```
 
 2. Compile o projeto:
