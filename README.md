@@ -5,7 +5,7 @@ Aplicação dos protocolos de codificação presentes na camada física do model
 ## Sobre o Projeto
 
 
-Este projeto simula o funcionamento dos protocolos presentes na camada física do modelo OSI de comunicação de redes, observáveis no padrão Ethernet. São eles a codificação binária, manchester e manchester diferendcial. Eles estão contextualizados dentro de uma  simulação de comunicação entre 2 dispositivos (um transmissor e outro receptor), cuja transmissão de sinais é representada na interface. 
+Este projeto simula o funcionamento dos protocolos presentes na camada física do modelo OSI de comunicação de redes, observáveis no padrão Ethernet. São eles a codificação binária, manchester e manchester diferencial. Eles estão contextualizados dentro de uma  simulação de interconexão entre 2 dispositivos (um transmissor e outro receptor), cuja transmissão de sinais é representada na interface. 
 Esse projeto foi desenvolvido como parte da disciplina de Redes I do curso de Ciência da Computação.
 
 ## Demonstração
