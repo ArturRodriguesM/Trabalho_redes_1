@@ -1,18 +1,54 @@
-## Getting Started
+# Camada Física
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Simulação dos protocolos de codificação presentes na camada física do modelo OSI, contextualizadas em uma simulação de comunicação de 2 dispositivos. 
 
-## Folder Structure
+## Sobre o Projeto
 
-The workspace contains two folders by default, where:
+Este projeto simula o funcionamento dos protocolos presentes na camada física do modelo OSI de comunicação de redes, observáveis no padrão Ethernet. São eles a codificação binária, manchester e manchester diferendcial. Eles estão contextualizados dentro de uma  simulação de comunicação entre 2 dispositivos (um transmissor e outro receptor), cuja transmissão de sinais é representada na interface. 
+Esse projeto foi desenvolvido como parte da disciplina de Redes I do curso de Ciência da Computação.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Demonstração
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+![demo](view/demo.webm)
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## Arquitetura
 
-## Dependency Management
+O projeto segue o padrão **MVC (Model-View-Controller)** centralizado:
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+- **Model**: responsável pela lógica dos algoritimos implementados e pelas estruturas de dados da simulação.
+- **View**: telas e componentes JavaFX (FXML) responsáveis pela apresentação visual.
+- **Controller**: intermediário entre Model e View, tratando eventos da interface e orquestrando as atualizações da simulação.
+
+## Tecnologia Utilizada
+
+- **Java** (versão 1.8.0_482)
+
+## Pré-requisitos
+
+- JDK 1.8.0_482 ou superior instalado
+
+## Como Executar
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/ArturRodriguesM/camada_fisica.git
+   cd Problema-dos-Trens
+   ```
+
+2. Compile o projeto:
+   ```bash
+   javac Principal.java
+   ```
+
+3. Execute a aplicação:
+   ```bash
+   java Principal
+   ```
+
+## Como Usar
+
+1. Indique o protocolo a ser utilizado para a transmissão
+2. Clique em "Iniciar" para começar a simulação
+3. Insira uma mensagem na caixa de texto do dispositivo transmissor e aperte em "Enviar"
+4. Utilize o controle disponível para alterar a velocidade da transmissão
+5. Visualize a mensagem recebida
