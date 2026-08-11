@@ -1,6 +1,6 @@
 # Camada Física
 
-Simulação dos protocolos de codificação presentes na camada física do modelo OSI, contextualizadas em uma simulação de comunicação de 2 dispositivos. 
+Aplicação dos protocolos de codificação presentes na camada física do modelo OSI, contextualizadas em uma simulação de comunicação de 2 dispositivos. 
 
 ## Sobre o Projeto
 
